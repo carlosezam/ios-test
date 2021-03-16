@@ -1,3 +1,5 @@
 Pods/
 
 *.xcworkspace
+
+Playground/GoogleService-Info.plist
