@@ -155,8 +155,30 @@
                     <view key="view" contentMode="scaleToFill" id="w5t-Cj-zTp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zpe-8m-cth">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReusableCell" id="K14-VV-Tiq">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="K14-VV-Tiq" id="ne9-r0-owh">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="PYI-PT-f9b"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="zpe-8m-cth" firstAttribute="leading" secondItem="PYI-PT-f9b" secondAttribute="leading" id="C8r-Rk-Np2"/>
+                            <constraint firstItem="zpe-8m-cth" firstAttribute="top" secondItem="PYI-PT-f9b" secondAttribute="top" id="MaC-Hg-YpH"/>
+                            <constraint firstItem="PYI-PT-f9b" firstAttribute="trailing" secondItem="zpe-8m-cth" secondAttribute="trailing" id="aIZ-hl-luY"/>
+                            <constraint firstItem="PYI-PT-f9b" firstAttribute="bottom" secondItem="zpe-8m-cth" secondAttribute="bottom" id="dX5-u0-tpT"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="3f1-B3-3DQ">
                         <barButtonItem key="rightBarButtonItem" title="SignOut" id="uQ8-35-18k">
@@ -166,6 +188,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="zpe-8m-cth" id="x1J-rO-dO8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hp8-fx-Urb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
