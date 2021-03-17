@@ -18,3 +18,11 @@ struct PokemonSetResult : Codable {
     let name: String
     let url: String
 }
+
+struct PokemonItem : Codable {
+    let sprites: PokemonSprites
+}
+
+struct PokemonSprites: Codable {
+    let front_shiny: String
+}

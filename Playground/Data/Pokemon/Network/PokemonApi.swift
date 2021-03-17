@@ -6,16 +6,20 @@
 //
 
 import Foundation
+import UIKit
 
 enum PokeApiError: Error {
     case NullResponse
     case MalformedResponse
 }
 
-struct PokemonApi {
+struct PokemonApi  {
+    
+    
+
     let apiUrl = "https://pokeapi.co/api/v2"
     
-    func getPokemonList( completion: @escaping (Result<[PokemonItem]>) -> Void ){
+    func getPokemonList( completion: @escaping (Result<[Pokemon]>) -> Void ){
         let urlString = "\(apiUrl)/pokemon"
         
         performRequest(urlString: urlString){ result in
@@ -26,9 +30,10 @@ struct PokemonApi {
             if case Result.Success(let data) = result {
                 if let decodedData = tryParseJson(of: PokemonSet.self, data: data) {
                     
-                    let pokemonList = decodedData.results.map { PokemonItem(name: $0.name) }
+                    let pokemonList = decodedData.results.map { Pokemon(name: $0.name, image: nil) }
                     
-                    completion( .Success(pokemonList) )
+                        completion( .Success(pokemonList) )
+                    
                 }else {
                     completion( .Failure(PokeApiError.MalformedResponse) )
                 }
@@ -37,6 +42,46 @@ struct PokemonApi {
         }
         
     }
+    
+    func getPokemon( byName name: String, completion: @escaping (Result<Pokemon>) -> Void){
+        let urlString = "\(apiUrl)/pokemon/\(name)"
+        performRequest(urlString: urlString){ result in
+            
+            if case Result.Failure(let error) = result {
+                completion( .Failure(error) )
+            }
+            
+            
+            if case Result.Success(let data) = result {
+                
+                if let decodedData = tryParseJson(of: PokemonItem.self, data: data) {
+                    
+                    let urlImage = decodedData.sprites.front_shiny
+                    
+                    // Spaghetti code :(
+                    performRequest(urlString: urlImage) { result in
+                        
+                        if case Result.Failure(let error) = result {
+                            completion( .Failure(error) )
+                        }
+                        
+                        if case Result.Success(let data) = result {
+                            completion( .Success(Pokemon(name: name, image: UIImage(data: data))))
+                            
+                        }
+                    }
+                    
+                    
+                    completion( .Success(Pokemon(name: name, image: nil)) )
+                }else {
+                    completion( .Failure(PokeApiError.MalformedResponse) )
+                }
+                
+            }
+        }
+    }
+    
+    
     
     func performRequest( urlString: String, completion: @escaping (Result<Data>) -> Void ){
         if let url = URL(string: urlString) {
