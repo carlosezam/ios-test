@@ -15,7 +15,7 @@ enum PokeApiError: Error {
 struct PokemonApi {
     let apiUrl = "https://pokeapi.co/api/v2"
     
-    func getPokemonList( completion: @escaping (Result<[Pokemon]>) -> Void ){
+    func getPokemonList( completion: @escaping (Result<[PokemonItem]>) -> Void ){
         let urlString = "\(apiUrl)/pokemon"
         
         performRequest(urlString: urlString){ result in
@@ -26,7 +26,7 @@ struct PokemonApi {
             if case Result.Success(let data) = result {
                 if let decodedData = tryParseJson(of: PokemonSet.self, data: data) {
                     
-                    let pokemonList = decodedData.results.map { Pokemon(name: $0.name) }
+                    let pokemonList = decodedData.results.map { PokemonItem(name: $0.name) }
                     
                     completion( .Success(pokemonList) )
                 }else {

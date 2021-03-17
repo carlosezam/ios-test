@@ -12,7 +12,9 @@ class HomeViewController: UIViewController {
     
     var auth = AuthManager()
     var pokeApi = PokemonApi()
-    var pokemonList : [Pokemon] = []
+    var pokemonList : [PokemonItem] = []
+    
+    let context = (UIApplication.shared.delegate as! AppDelegate)
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
