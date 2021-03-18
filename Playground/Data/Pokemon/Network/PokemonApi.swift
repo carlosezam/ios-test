@@ -71,8 +71,6 @@ struct PokemonApi  {
                         }
                     }
                     
-                    
-                    completion( .Success(Pokemon(name: name, image: nil)) )
                 }else {
                     completion( .Failure(PokeApiError.MalformedResponse) )
                 }

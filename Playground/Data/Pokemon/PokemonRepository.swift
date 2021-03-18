@@ -18,6 +18,26 @@ class PokemonRepository {
         self.remote = remote
     }
     
+    func get( byName name: String, completion: @escaping (Result<Pokemon?>) -> Void ){
+        let reachability = Reachability.isConnectedToNetwork()
+        
+        if( reachability ){
+            remote.getPokemon(byName: name) { result in
+                if case Result.Failure(let error) = result {
+                    completion( .Failure(error) )
+                }
+                
+                if case Result.Success(let data) = result {
+                    self.local.upsert(pokemon: data)
+                    completion( .Success(data) )
+                }
+            }
+        } else {
+            let data = local.get(byName: name)
+            completion( .Success(data) )
+        }
+    }
+    
     func getAll( completion: @escaping (Result<[Pokemon]?>) -> Void ){
         
         

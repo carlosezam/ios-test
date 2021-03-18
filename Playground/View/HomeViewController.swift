@@ -7,11 +7,11 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: CustomViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var auth = AuthManager()
-    var pokeApi = PokemonApi()
+    //var pokeApi = PokemonApi()
     var pokemonList : [Pokemon] = []
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -31,6 +31,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
+        tableView.delegate = self
         repository.getAll {
             if case Result.Success(let list) = $0 {
                 self.pokemonList = list ?? [Pokemon]()
@@ -90,4 +91,22 @@ extension HomeViewController: UITableViewDataSource {
     }
     
     
+}
+
+extension HomeViewController : UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        showDetails(pokemon: pokemonList[ indexPath.row] )
+        //performSegue(withIdentifier: "ListToItem", sender: self)
+    }
+    
+    func showDetails(pokemon: Pokemon){
+        guard let vc = storyboard?.instantiateViewController(identifier: "Details", creator: { coder in
+            return DetailsViewController(coder: coder, pokemon: pokemon, repository: self.repository)
+        }) else {
+            fatalError("Failed to laod DetailsViewController from storyboard")
+        }
+        
+        navigationController?.pushViewController(vc, animated: true)
+        //navigationController?.present(vc, animated: true, completion: nil)
+    }
 }

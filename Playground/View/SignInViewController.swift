@@ -12,7 +12,7 @@ protocol SignInView {
     var email: String {get set}
 }
 
-class SignInViewController: UIViewController, SignInView {
+class SignInViewController: CustomViewController, SignInView {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passField: UITextField!
     
@@ -50,31 +50,15 @@ class SignInViewController: UIViewController, SignInView {
         // Do any additional setup after loading the view.
     }
     
-    var alert: UIAlertController?
     
-    func loading(){
-        alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
-
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.style = UIActivityIndicatorView.Style.medium
-        loadingIndicator.startAnimating();
-
-        alert!.view.addSubview(loadingIndicator)
-        present(alert!, animated: true, completion: nil)
-        
-    }
-    func ending(){
-        alert?.dismiss(animated: false, completion: nil)
-    }
     
     @IBAction func signInPressed(_ sender: UIButton) {
         guard let email = emailField.text, !email.isEmpty,
               let pass = passField.text, !pass.isEmpty
         else { return }
-        loading()
+        showLoadingAlert()
         autmgr.signIn(email: email, password: pass ){ result in
-            self.ending()
+            self.dismisLoadingAlert()
             switch result {
             case .Success(_): self.goToHome()
             case .Failure(let error): self.showError(error)

@@ -10,6 +10,8 @@
 		18329473CD0F87EBCB20F3E3 /* Pods_Playground.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D5BC1641C7A5EC0B77DD1D /* Pods_Playground.framework */; };
 		750D75C5260272FC00ADABB3 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750D75C4260272FC00ADABB3 /* Reachability.swift */; };
 		750D75CA2602963D00ADABB3 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 750D75C82602963D00ADABB3 /* DataModel.xcdatamodeld */; };
+		750D75CD2602A55C00ADABB3 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750D75CC2602A55C00ADABB3 /* DetailsViewController.swift */; };
+		750D75DF2602B96800ADABB3 /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750D75DE2602B96800ADABB3 /* CustomViewController.swift */; };
 		759ED88A26019EB400E0B708 /* DesignableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759ED88926019EB400E0B708 /* DesignableView.swift */; };
 		759ED8932601C88500E0B708 /* PokemonRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759ED8922601C88500E0B708 /* PokemonRepository.swift */; };
 		75B4B31926001FE5001A5C7E /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B4B31826001FE5001A5C7E /* SignInViewController.swift */; };
@@ -33,6 +35,8 @@
 		65553B0433CC5AC16A6F006A /* Pods-Playground.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Playground.debug.xcconfig"; path = "Target Support Files/Pods-Playground/Pods-Playground.debug.xcconfig"; sourceTree = "<group>"; };
 		750D75C4260272FC00ADABB3 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		750D75C92602963D00ADABB3 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		750D75CC2602A55C00ADABB3 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		750D75DE2602B96800ADABB3 /* CustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
 		759ED88926019EB400E0B708 /* DesignableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableView.swift; sourceTree = "<group>"; };
 		759ED8922601C88500E0B708 /* PokemonRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonRepository.swift; sourceTree = "<group>"; };
 		75B4B31826001FE5001A5C7E /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -101,21 +105,27 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
+		750D75E32602BBD500ADABB3 /* Internals */ = {
+			isa = PBXGroup;
+			children = (
+				75B4B3252600374A001A5C7E /* Result.swift */,
+				750D75DE2602B96800ADABB3 /* CustomViewController.swift */,
+				759ED88926019EB400E0B708 /* DesignableView.swift */,
+				750D75C4260272FC00ADABB3 /* Reachability.swift */,
+				75B4B32826003E74001A5C7E /* Constants.swift */,
+			);
+			path = Internals;
+			sourceTree = "<group>";
+		};
 		759ED88826019E7F00E0B708 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				75E1C0A825FEE5B80092BDC9 /* Main.storyboard */,
 				75B4B32D2600424F001A5C7E /* HomeViewController.swift */,
 				75B4B31826001FE5001A5C7E /* SignInViewController.swift */,
-				759ED88926019EB400E0B708 /* DesignableView.swift */,
+				750D75CC2602A55C00ADABB3 /* DetailsViewController.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		75B4B31326001F13001A5C7E /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controller;
 			sourceTree = "<group>";
 		};
 		75B4B320260030DB001A5C7E /* Data */ = {
@@ -123,7 +133,6 @@
 			children = (
 				750D75BE2602319800ADABB3 /* Authentication */,
 				750D75BD2602315A00ADABB3 /* Pokemon */,
-				75B4B3252600374A001A5C7E /* Result.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -167,18 +176,15 @@
 		75E1C0A125FEE5B80092BDC9 /* Playground */ = {
 			isa = PBXGroup;
 			children = (
+				750D75E32602BBD500ADABB3 /* Internals */,
 				759ED88826019E7F00E0B708 /* View */,
 				75B4B320260030DB001A5C7E /* Data */,
-				75B4B31326001F13001A5C7E /* Controller */,
 				75E1C0C425FEF0140092BDC9 /* GoogleService-Info.plist */,
 				75E1C0A225FEE5B80092BDC9 /* AppDelegate.swift */,
 				75E1C0A425FEE5B80092BDC9 /* SceneDelegate.swift */,
-				75E1C0A825FEE5B80092BDC9 /* Main.storyboard */,
 				75E1C0AB25FEE5BA0092BDC9 /* Assets.xcassets */,
 				75E1C0AD25FEE5BA0092BDC9 /* LaunchScreen.storyboard */,
 				75E1C0B025FEE5BA0092BDC9 /* Info.plist */,
-				75B4B32826003E74001A5C7E /* Constants.swift */,
-				750D75C4260272FC00ADABB3 /* Reachability.swift */,
 			);
 			path = Playground;
 			sourceTree = "<group>";
@@ -308,10 +314,12 @@
 				75B4B32E2600424F001A5C7E /* HomeViewController.swift in Sources */,
 				75B4B31926001FE5001A5C7E /* SignInViewController.swift in Sources */,
 				75B4B33126004E3B001A5C7E /* PokemonModels.swift in Sources */,
+				750D75DF2602B96800ADABB3 /* CustomViewController.swift in Sources */,
 				759ED8932601C88500E0B708 /* PokemonRepository.swift in Sources */,
 				75B4B3262600374A001A5C7E /* Result.swift in Sources */,
 				75E1C0A525FEE5B80092BDC9 /* SceneDelegate.swift in Sources */,
 				75B4B32926003E74001A5C7E /* Constants.swift in Sources */,
+				750D75CD2602A55C00ADABB3 /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
