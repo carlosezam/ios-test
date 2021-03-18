@@ -46,6 +46,17 @@ El proceso puede tardar varios minutos, dependiendo de tu conexión a internet
 
 para más información: [Using CocoaPods](https://guides.cocoapods.org/using/using-cocoapods.html)
 
+### Firebase
+Dado que este proyecto usa Firebase Authentication como servicio de autenticación es necesario crear un proyecto en la [consola de Firebase](https://console.firebase.google.com/).
+
+Una vez creado el proyecto debe registrar una nueva app iOS para obtener el archivo ```GoogleService-Info.plist```. Este archivo deberas agregarlo al proyecto en la siguiente ruta: ```Playground/Playground/GoogleService-info.plist```
+
+#### Importante!
+Durante el proceso se solicitará el id de la app, este debe ser único por lo que debes proporcionar uno diferente al del proyecto y cambiarlo.
+e.g. ```com.yourname.yourproject```. Puedes cambiar el id abriendo el proyecto con Xcode y yendo a: Playground > General > Targets > Playground > Bundle Identifier.
+
+Para más información: [iOS setup](https://firebase.google.com/docs/ios/setup?authuser=0)
+
 ### Listo!
 
 Ahora solo resta abrir el proyecto mediante el archivo
