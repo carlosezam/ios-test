@@ -8,22 +8,11 @@
 import UIKit
 import Firebase
 
-protocol SignInView {
-    var email: String {get set}
-}
 
-class SignInViewController: CustomViewController, SignInView {
+
+class SignInViewController: CustomViewController {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passField: UITextField!
-    
-    var email: String {
-        get {
-            emailField.text ?? ""
-        }
-        set {
-            emailField.text = newValue
-        }
-    }
     
     let autmgr = AuthManager()
     
@@ -47,10 +36,20 @@ class SignInViewController: CustomViewController, SignInView {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(sender:)), name: UIResponder.keyboardWillShowNotification, object: nil);
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(sender:)), name: UIResponder.keyboardWillHideNotification, object: nil);
+        
+        emailField.becomeFirstResponder()
     }
     
-    
+    @objc func keyboardWillShow(sender: NSNotification) {
+         self.view.frame.origin.y = -150 // Move view 150 points upward
+    }
+
+    @objc func keyboardWillHide(sender: NSNotification) {
+         self.view.frame.origin.y = 0 // Move view to original position
+    }
     
     @IBAction func signInPressed(_ sender: UIButton) {
         guard let email = emailField.text, !email.isEmpty,
@@ -71,8 +70,9 @@ class SignInViewController: CustomViewController, SignInView {
         guard let email = emailField.text, !email.isEmpty,
               let pass = passField.text, !pass.isEmpty
         else { return }
-        
+        showLoadingAlert()
         autmgr.signUp(email: email, password: pass ){ result in
+            self.dismisLoadingAlert()
             switch result {
             case .Success(_): self.goToHome()
             case .Failure(let error): self.showError(error)
@@ -84,11 +84,7 @@ class SignInViewController: CustomViewController, SignInView {
         performSegue(withIdentifier: K.Segue.SignInToHome, sender: self )
     }
     
-    func showError(_ error: Error){
-        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "title", style: .default, handler: nil))
-        present(alert, animated: true)
-    }
+    
     
     
     

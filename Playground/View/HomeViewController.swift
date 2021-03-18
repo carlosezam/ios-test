@@ -32,7 +32,9 @@ class HomeViewController: CustomViewController {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        //showLoadingAlert()
         repository.getAll {
+            self.dismisLoadingAlert()
             if case Result.Success(let list) = $0 {
                 self.pokemonList = list ?? [Pokemon]()
                 
@@ -55,7 +57,7 @@ class HomeViewController: CustomViewController {
         auth.signOut { result in
             switch result {
             case .Success(_): self.goToSignIn()
-            case .Failure(let error): self.showError(error: error)
+            case .Failure(let error): self.showError(error)
             }
         }
     }
@@ -64,9 +66,7 @@ class HomeViewController: CustomViewController {
         navigationController?.popToRootViewController(animated: true)
     }
     
-    func showError(error: Error){
-        
-    }
+   
     /*
     // MARK: - Navigation
 
@@ -106,7 +106,7 @@ extension HomeViewController : UITableViewDelegate {
             fatalError("Failed to laod DetailsViewController from storyboard")
         }
         
-        navigationController?.pushViewController(vc, animated: true)
-        //navigationController?.present(vc, animated: true, completion: nil)
+        //navigationController?.pushViewController(vc, animated: true)
+        navigationController?.present(vc, animated: true, completion: nil)
     }
 }

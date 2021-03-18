@@ -14,6 +14,7 @@ class DetailsViewController: CustomViewController {
     
     @IBOutlet weak var pokemonImage: UIImageView!
     @IBOutlet weak var pokemonName: UILabel!
+    
     init?(coder: NSCoder, pokemon: Pokemon, repository: PokemonRepository){
         self.pokemon = pokemon
         self.repository = repository
@@ -29,7 +30,7 @@ class DetailsViewController: CustomViewController {
         repository.get(byName: pokemon.name){ result in
             self.dismisLoadingAlert()
             if case Result.Failure(let error) = result {
-                print(error)
+                self.showError(error)
             }
             if case Result.Success(let pokemon) = result {
                 DispatchQueue.main.async {

@@ -30,4 +30,16 @@ class CustomViewController: UIViewController {
             self.loadingAlert?.dismiss(animated: false, completion: nil)
         }
     }
+    
+    func showError(_ error: Error){
+        
+        // fix
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ) {
+        
+        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            self.present(alert, animated: true)
+            
+        }
+    }
 }
